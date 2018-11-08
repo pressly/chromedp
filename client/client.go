@@ -6,6 +6,7 @@ package client
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -15,6 +16,7 @@ import (
 	"time"
 
 	"github.com/mailru/easyjson"
+	"github.com/moul/http2curl"
 )
 
 const (
@@ -87,6 +89,11 @@ func (c *Client) doReq(ctxt context.Context, action string, v interface{}) error
 		return err
 	}
 	req = req.WithContext(ctxt)
+
+	command, _ := http2curl.GetCurlCommand(req)
+	fmt.Println()
+	fmt.Println(command)
+	fmt.Println()
 
 	cl := &http.Client{}
 
