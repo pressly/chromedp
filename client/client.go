@@ -91,9 +91,7 @@ func (c *Client) doReq(ctxt context.Context, action string, v interface{}) error
 	req = req.WithContext(ctxt)
 
 	command, _ := http2curl.GetCurlCommand(req)
-	fmt.Println()
 	fmt.Println(command)
-	fmt.Println()
 
 	cl := &http.Client{}
 
@@ -137,6 +135,7 @@ func (c *Client) ListTargets(ctxt context.Context) ([]Target, error) {
 		if err != nil {
 			return nil, err
 		}
+		fmt.Println("target", t[i].GetWebsocketURL())
 	}
 
 	return t, nil
